@@ -5,10 +5,21 @@
  */
 package utils;
 
-import entities.Course;
-import entities.CourseClass;
-import entities.Teacher;
-import facades.CourseFacade;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseToken;
+import dto.PostDTO;
+import dto.PostDTOWithUid;
+import dto.UIDDTO;
+import dto.UserInfoDTO;
+import entities.Post;
+import entities.UserInfo;
+import facades.PostFacade;
+import facades.UserInfoFacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -22,39 +33,22 @@ public class SetupTestDB {
         
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         EntityManager em = emf.createEntityManager();
+        EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
+        UserInfoFacade FACADE =  UserInfoFacade.getFacade(EMF);
+        PostFacade postFACADE =  PostFacade.getFacade(EMF);
+          
         
-        Course course1 = new Course("Java for beginngers", "For people who has no exp in java before.");
-        Course course2 = new Course("Python for beginngers", "For people who has no exp in Python before.");
+        List<Post> posts = new ArrayList();
         
-        CourseClass courseClass1 = new CourseClass(1, 40);
-        CourseClass courseClass2 = new CourseClass(1, 40);
+        Post p1 = new Post("test");
+        Post p2 = new Post("test2");
         
-        course1.addCourseClasses(courseClass1);
-        course1.addCourseClasses(courseClass2);
-        
-        Teacher t1 = new Teacher("Jesper", "jesper@gmail.com"); 
-        Teacher t2 = new Teacher("Jørg", "Jørg@gmail.com"); 
-        Teacher t3 = new Teacher("Hanne", "Hanne@gmail.com"); 
-        Teacher t4 = new Teacher("Abed", "Hanne@gmail.com"); 
-        
-        courseClass1.addTeachers(t3);
-        courseClass1.addTeachers(t2);
-        courseClass1.addTeachers(t1);
-        courseClass2.addTeachers(t3);
-        
-        em.getTransaction().begin();
-        em.persist(courseClass1);
-        em.persist(courseClass2);
-        em.getTransaction().commit();
-        
-        em.getTransaction().begin();
-        courseClass1.addTeachers(t4);
-        em.getTransaction().commit();
-        
-        TypedQuery<Course> query = em.createQuery("SELECT c FROM Course c", Course.class);
-        for (Course c : query.getResultList()){
-            System.out.println(c.getCourseName());
+        String uid = "AqAWTnG7ZJUVwNh01TJU0mu0pBR2";
+        for (PostDTO p : postFACADE.getAllPost(uid)){
+            System.out.println(p.getMessage());
         }
-
-    }
+        
+        PostDTOWithUid postDTOWtihUid = new PostDTOWithUid("TestSetUP", uid);
+        postFACADE.addPost(postDTOWtihUid);
+    }   
 }
