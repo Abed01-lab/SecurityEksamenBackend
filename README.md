@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Abed01-lab/CA03Backend.svg?branch=master)](https://travis-ci.com/Abed01-lab/CA03Backend)
+[![Build Status](https://travis-ci.com/Abed01-lab/SecurityEksamenBackend.svg?branch=main)](https://travis-ci.com/Abed01-lab/SecurityEksamenBackend)
 ### This project is meant as start code for your Exam
 ### Start Guide:
  - * Clone the project
