@@ -6,7 +6,6 @@
 package facades;
 
 import dto.PostDTO;
-import dto.PostDTOWithUid;
 import entities.Post;
 import entities.UserInfo;
 import java.util.ArrayList;
@@ -41,7 +40,9 @@ public class PostFacade {
     public List<PostDTO> getAllPost(String uid){
         EntityManager em = getEntityManager();
         List<PostDTO> posts = new ArrayList();
-        TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u WHERE u.uid = :input", UserInfo.class)
+        TypedQuery<UserInfo> query = em.createQuery(
+                "SELECT u FROM UserInfo u WHERE u.uid = :input", 
+                UserInfo.class)
                 .setParameter("input", uid);
         
         UserInfo userInfo = query.getSingleResult();
@@ -52,10 +53,10 @@ public class PostFacade {
     }
    
     //Add post    
-    public List<PostDTO> addPost(PostDTOWithUid postDTO){
+    public List<PostDTO> addPost(PostDTO postDTO, String uid){
         EntityManager em = getEntityManager();
         TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u WHERE u.uid = :input", UserInfo.class)
-                .setParameter("input", postDTO.getUid());
+                .setParameter("input", uid);
         
         UserInfo userInfo = query.getSingleResult();
         Post post = new Post(postDTO.getMessage());
@@ -66,6 +67,6 @@ public class PostFacade {
         } finally {
             em.close();
         }
-        return getAllPost(postDTO.getUid());
+        return getAllPost(uid);
     }
 }

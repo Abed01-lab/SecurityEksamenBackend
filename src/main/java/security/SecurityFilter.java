@@ -19,6 +19,8 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import java.io.FileInputStream;
+import java.security.Principal;
+import javax.ws.rs.core.SecurityContext;
 
 /**
  *
@@ -55,7 +57,28 @@ public class SecurityFilter implements ContainerRequestFilter{
             try {                    
                 FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(authToken);
                 String uid = decodedToken.getUid();
-                System.out.println(uid);
+                
+                requestContext.setSecurityContext(new SecurityContext() {
+                    @Override
+                    public Principal getUserPrincipal() {
+                        return () -> uid;
+                    }
+
+                    @Override
+                    public boolean isUserInRole(String role) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public boolean isSecure() {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public String getAuthenticationScheme() {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
                 return;
             
             } catch (Exception e) {

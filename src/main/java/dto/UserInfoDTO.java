@@ -5,6 +5,8 @@
  */
 package dto;
 
+import entities.UserInfo;
+
 /**
  *
  * @author abedh
@@ -23,6 +25,13 @@ public class UserInfoDTO {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.sex = sex;
+    }
+    
+    public UserInfoDTO(UserInfo userInfo) {
+        this.uid = userInfo.getUid();
+        this.name = userInfo.getName();
+        this.phoneNumber = userInfo.getPhoneNumber();
+        this.sex = userInfo.getSex();
     }
 
     public String getName() {

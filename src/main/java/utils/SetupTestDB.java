@@ -11,7 +11,6 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import dto.PostDTO;
-import dto.PostDTOWithUid;
 import dto.UIDDTO;
 import dto.UserInfoDTO;
 import entities.Post;
@@ -25,7 +24,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
 /**
- *
  * @author abed
  */
 public class SetupTestDB {
@@ -47,8 +45,5 @@ public class SetupTestDB {
         for (PostDTO p : postFACADE.getAllPost(uid)){
             System.out.println(p.getMessage());
         }
-        
-        PostDTOWithUid postDTOWtihUid = new PostDTOWithUid("TestSetUP", uid);
-        postFACADE.addPost(postDTOWtihUid);
     }   
 }

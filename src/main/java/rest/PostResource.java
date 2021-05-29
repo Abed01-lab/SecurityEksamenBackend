@@ -7,7 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.PostDTOWithUid;
+import dto.PostDTO;
 import facades.PostFacade;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.Context;
@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import utils.EMF_Creator;
 
 /**
@@ -35,7 +36,7 @@ public class PostResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
     @Context
-    private UriInfo context;
+    private SecurityContext securityContext;
     
     /**
      * Creates a new instance of PostResource
@@ -45,9 +46,9 @@ public class PostResource {
 
     //Get all post
     @GET
-    @Path("{uid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPost(@PathParam("uid") String uid){
+    public String getAllPost(){
+        String uid = securityContext.getUserPrincipal().getName();
         return GSON.toJson(FACADE.getAllPost(uid));
     }
     
@@ -55,7 +56,8 @@ public class PostResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String addAPost(PostDTOWithUid postDTO){
-        return GSON.toJson(FACADE.addPost(postDTO));
+    public String addAPost(PostDTO postDTO){
+        String uid = securityContext.getUserPrincipal().getName();
+        return GSON.toJson(FACADE.addPost(postDTO, uid));
     }
 }

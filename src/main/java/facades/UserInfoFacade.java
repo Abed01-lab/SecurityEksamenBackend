@@ -8,6 +8,8 @@ package facades;
 import dto.UIDDTO;
 import dto.UserInfoDTO;
 import entities.UserInfo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -35,6 +37,7 @@ public class UserInfoFacade {
     }
      
     
+    //add userInfo
     public UserInfoDTO addUserInfo(UserInfoDTO userInfoDTO) {
         EntityManager em = getEntityManager();
         
@@ -49,21 +52,31 @@ public class UserInfoFacade {
     }
     
     
+    //get userInfo    
     public UserInfoDTO getUserInfo(String uid) {
         EntityManager em = getEntityManager();
         UserInfoDTO userInfoDTO;
         try {
             TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u WHERE u.uid = :input", UserInfo.class).setParameter("input", uid);
             UserInfo userInfo = query.getSingleResult();
-            userInfoDTO = new UserInfoDTO(userInfo.getUid(), userInfo.getName(), userInfo.getPhoneNumber(), userInfo.getSex());            
+            userInfoDTO = new UserInfoDTO(userInfo.getUid(), userInfo.getName(), userInfo.getPhoneNumber(), userInfo.getSex()); 
             return userInfoDTO;
         } catch(Exception e) {
             return null;
         }
     }
     
-    
-    //add userInfo
-    //get userInfo    
     //edit userInfo
+    
+    //get All UserIngo
+    public List<UserInfoDTO> getAllUserInfo () {
+        EntityManager em = getEntityManager();
+        TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u", UserInfo.class);
+        List<UserInfoDTO> userInfoDTOs = new ArrayList();
+        for (UserInfo u : query.getResultList())
+            userInfoDTOs.add(new UserInfoDTO(u));
+        
+        return userInfoDTOs;
+        
+    }
 }
