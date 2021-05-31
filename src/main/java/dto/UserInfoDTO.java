@@ -12,58 +12,57 @@ import entities.UserInfo;
  * @author abedh
  */
 public class UserInfoDTO {
-    private String uid;
-    private String name;
-    private int phoneNumber;
-    private String sex;
 
-    public UserInfoDTO() {
-    }
-    
-    public UserInfoDTO(String uid, String name, int phoneNumber, String sex) {
-        this.uid = uid;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.sex = sex;
-    }
-    
-    public UserInfoDTO(UserInfo userInfo) {
-        this.uid = userInfo.getUid();
-        this.name = userInfo.getName();
-        this.phoneNumber = userInfo.getPhoneNumber();
-        this.sex = userInfo.getSex();
-    }
+  private String uid;
+  private String name;
+  private int phoneNumber;
+  private String sex;
 
-    public String getName() {
-        return name;
-    }
+  public UserInfoDTO() {}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public UserInfoDTO(String uid, String name, int phoneNumber, String sex) {
+    this.uid = uid;
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.sex = sex;
+  }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
+  public UserInfoDTO(UserInfo userInfo) {
+    this.uid = userInfo.getUid();
+    this.name = userInfo.getName();
+    this.phoneNumber = userInfo.getPhoneNumber();
+    this.sex = userInfo.getSex();
+  }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getSex() {
-        return sex;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+  public int getPhoneNumber() {
+    return phoneNumber;
+  }
 
-    public String getUid() {
-        return uid;
-    }
+  public void setPhoneNumber(int phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
-    
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+  public String getUid() {
+    return uid;
+  }
+
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 }

@@ -10,20 +10,20 @@ package dto;
  * @author abedh
  */
 public class PostDTO {
-    private String message;    
 
-    public PostDTO() {
-    }
+  private String message;
 
-    public PostDTO(String message) {
-        this.message = message;
-    }
+  public PostDTO() {}
 
-    public String getMessage() {
-        return message;
-    }
+  public PostDTO(String message) {
+    this.message = message;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

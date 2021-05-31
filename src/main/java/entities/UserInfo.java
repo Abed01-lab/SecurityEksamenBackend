@@ -5,16 +5,16 @@
  */
 package entities;
 
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import dto.UserInfoDTO;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,85 +26,84 @@ import javax.persistence.Table;
 @Table(name = "userInfo")
 public class UserInfo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userInfo_id")
-    private int id;
-    @Column(name = "userInfo_uid")
-    private String uid;
-    @Column(name = "userInfo_name")
-    private String name;
-    @Column(name = "userInfo_phone_number")
-    private int phoneNumber;
-    @Column(name = "userInfo_sex")
-    private String sex;
-    
-    @OneToMany(mappedBy = "userInfo", cascade = CascadeType.PERSIST)
-    private List<Post> posts;
+  private static final long serialVersionUID = 1L;
 
-    public UserInfo() {
-    }
-    
-    
-    public UserInfo(String uid, String name, int phoneNumber, String sex) {
-        this.uid = uid;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.sex = sex;
-        this.posts = new ArrayList<>();
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "userInfo_id")
+  private int id;
 
-    public int getId() {
-        return id;
-    }
+  @Column(name = "userInfo_uid")
+  private String uid;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  @Column(name = "userInfo_name")
+  private String name;
 
-    public String getUid() {
-        return uid;
-    }
+  @Column(name = "userInfo_phone_number")
+  private int phoneNumber;
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  @Column(name = "userInfo_sex")
+  private String sex;
 
-    public String getName() {
-        return name;
-    }
+  @OneToMany(mappedBy = "userInfo", cascade = CascadeType.PERSIST)
+  private List<Post> posts;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public UserInfo() {}
 
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
+  public UserInfo(String uid, String name, int phoneNumber, String sex) {
+    this.uid = uid;
+    this.name = name;
+    this.phoneNumber = phoneNumber;
+    this.sex = sex;
+    this.posts = new ArrayList<>();
+  }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getSex() {
-        return sex;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+  public String getUid() {
+    return uid;
+  }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 
-    public void addPost(Post post) {
-        this.posts.add(post);
-        if(post != null)
-            post.setUserInfo(this);
-    }
-    
-    
+  public String getName() {
+    return name;
+  }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getPhoneNumber() {
+    return phoneNumber;
+  }
+
+  public void setPhoneNumber(int phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  public String getSex() {
+    return sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
+
+  public List<Post> getPosts() {
+    return posts;
+  }
+
+  public void addPost(Post post) {
+    this.posts.add(post);
+    if (post != null) post.setUserInfo(this);
+  }
 }

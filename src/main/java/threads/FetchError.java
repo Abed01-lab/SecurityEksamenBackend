@@ -1,61 +1,53 @@
-
 package threads;
 
 /**
  *
  * @author Abed
  */
-public class FetchError
-{
-    private String error;
-    private String url;
+public class FetchError {
 
-    /**
-     *
-     * @param error
-     * @param url
-     */
-    public FetchError(String error, String url)
-    {
-        this.error = error;
-        this.url = url;
-    }
+  private String error;
+  private String url;
 
-    /**
-     *
-     * @return
-     */
-    public String getError()
-    {
-        return error;
-    }
+  /**
+   *
+   * @param error
+   * @param url
+   */
+  public FetchError(String error, String url) {
+    this.error = error;
+    this.url = url;
+  }
 
-    /**
-     *
-     * @param error
-     */
-    public void setError(String error)
-    {
-        this.error = error;
-    }
+  /**
+   *
+   * @return
+   */
+  public String getError() {
+    return error;
+  }
 
-    /**
-     *
-     * @return
-     */
-    public String getUrl()
-    {
-        return url;
-    }
+  /**
+   *
+   * @param error
+   */
+  public void setError(String error) {
+    this.error = error;
+  }
 
-    /**
-     *
-     * @param url
-     */
-    public void setUrl(String url)
-    {
-        this.url = url;
-    }
-    
-    
+  /**
+   *
+   * @return
+   */
+  public String getUrl() {
+    return url;
+  }
+
+  /**
+   *
+   * @param url
+   */
+  public void setUrl(String url) {
+    this.url = url;
+  }
 }

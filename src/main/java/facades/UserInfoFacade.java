@@ -19,64 +19,84 @@ import javax.persistence.TypedQuery;
  * @author abedh
  */
 public class UserInfoFacade {
-    private static UserInfoFacade instance;
-    private static EntityManagerFactory emf;
-    
-    private UserInfoFacade() {}
-    
-    public static UserInfoFacade getFacade(EntityManagerFactory _emf) {
-        if (instance == null) {
-            emf = _emf;
-            instance = new UserInfoFacade();
-        }
-        return instance;
+
+  private static UserInfoFacade instance;
+  private static EntityManagerFactory emf;
+
+  private UserInfoFacade() {}
+
+  public static UserInfoFacade getFacade(EntityManagerFactory _emf) {
+    if (instance == null) {
+      emf = _emf;
+      instance = new UserInfoFacade();
     }
-     
-    private EntityManager getEntityManager() {
-        return emf.createEntityManager();
+    return instance;
+  }
+
+  private EntityManager getEntityManager() {
+    return emf.createEntityManager();
+  }
+
+  //add userInfo
+  public UserInfoDTO addUserInfo(UserInfoDTO userInfoDTO) {
+    EntityManager em = getEntityManager();
+
+    try {
+      em.getTransaction().begin();
+      em.persist(
+        new UserInfo(
+          userInfoDTO.getUid(),
+          userInfoDTO.getName(),
+          userInfoDTO.getPhoneNumber(),
+          userInfoDTO.getSex()
+        )
+      );
+      em.getTransaction().commit();
+    } finally {
+      em.close();
     }
-     
-    
-    //add userInfo
-    public UserInfoDTO addUserInfo(UserInfoDTO userInfoDTO) {
-        EntityManager em = getEntityManager();
-        
-        try {
-            em.getTransaction().begin();
-            em.persist(new  UserInfo(userInfoDTO.getUid(), userInfoDTO.getName(), userInfoDTO.getPhoneNumber(), userInfoDTO.getSex()));
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
-        return userInfoDTO;
+    return userInfoDTO;
+  }
+
+  //get userInfo
+  public UserInfoDTO getUserInfo(String uid) {
+    EntityManager em = getEntityManager();
+    UserInfoDTO userInfoDTO;
+    try {
+      TypedQuery<UserInfo> query = em
+        .createQuery(
+          "SELECT u FROM UserInfo u WHERE u.uid = :input",
+          UserInfo.class
+        )
+        .setParameter("input", uid);
+      UserInfo userInfo = query.getSingleResult();
+      userInfoDTO =
+        new UserInfoDTO(
+          userInfo.getUid(),
+          userInfo.getName(),
+          userInfo.getPhoneNumber(),
+          userInfo.getSex()
+        );
+      return userInfoDTO;
+    } catch (Exception e) {
+      return null;
     }
-    
-    
-    //get userInfo    
-    public UserInfoDTO getUserInfo(String uid) {
-        EntityManager em = getEntityManager();
-        UserInfoDTO userInfoDTO;
-        try {
-            TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u WHERE u.uid = :input", UserInfo.class).setParameter("input", uid);
-            UserInfo userInfo = query.getSingleResult();
-            userInfoDTO = new UserInfoDTO(userInfo.getUid(), userInfo.getName(), userInfo.getPhoneNumber(), userInfo.getSex()); 
-            return userInfoDTO;
-        } catch(Exception e) {
-            return null;
-        }
-    }
-    
-    //edit userInfo
-    
-    //get All UserIngo
-    public List<UserInfoDTO> getAllUserInfo () {
-        EntityManager em = getEntityManager();
-        TypedQuery<UserInfo> query = em.createQuery("SELECT u FROM UserInfo u", UserInfo.class);
-        List<UserInfoDTO> userInfoDTOs = new ArrayList();
-        for (UserInfo u : query.getResultList())
-            userInfoDTOs.add(new UserInfoDTO(u));
-        
-        return userInfoDTOs;
-        
-    }
+  }
+
+  //edit userInfo
+
+  //get All UserIngo
+  public List<UserInfoDTO> getAllUserInfo() {
+    EntityManager em = getEntityManager();
+    TypedQuery<UserInfo> query = em.createQuery(
+      "SELECT u FROM UserInfo u",
+      UserInfo.class
+    );
+    List<UserInfoDTO> userInfoDTOs = new ArrayList();
+    for (UserInfo u : query.getResultList()) userInfoDTOs.add(
+      new UserInfoDTO(u)
+    );
+
+    return userInfoDTOs;
+  }
 }

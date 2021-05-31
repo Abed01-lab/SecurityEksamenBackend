@@ -23,49 +23,46 @@ import javax.persistence.Table;
 @Table(name = "post")
 public class Post implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "post_id")
-    private int id;
-    @Column(name = "post_message")
-    private String message;
-    
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private UserInfo userInfo;
+  private static final long serialVersionUID = 1L;
 
-    public Post() {
-    }
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "post_id")
+  private int id;
 
-    public Post(String message) {
-        this.message = message;
-    }
+  @Column(name = "post_message")
+  private String message;
 
-    public int getId() {
-        return id;
-    }
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  private UserInfo userInfo;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public Post() {}
 
-    public String getMessage() {
-        return message;
-    }
+  public Post(String message) {
+    this.message = message;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
-    }
-    
-    
-    
-    
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public UserInfo getUserInfo() {
+    return userInfo;
+  }
+
+  public void setUserInfo(UserInfo userInfo) {
+    this.userInfo = userInfo;
+  }
 }

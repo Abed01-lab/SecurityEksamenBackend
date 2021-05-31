@@ -13,22 +13,20 @@ import java.util.List;
  * @author abed
  */
 public class ThreadHandler {
-        private static List<String> urls = new ArrayList();
 
-    public ThreadHandler() {
-        
-    }
-    
+  private static List<String> urls = new ArrayList();
 
-    public static List<String> getUrls() {
-        return urls;
-    }
+  public ThreadHandler() {}
 
-    public static void setUrls(List<String> urls) {
-        ThreadHandler.urls = urls;
-    }
-    
-    public static void addUrl(String url) {
-        urls.add(url);
-    }
+  public static List<String> getUrls() {
+    return urls;
+  }
+
+  public static void setUrls(List<String> urls) {
+    ThreadHandler.urls = urls;
+  }
+
+  public static void addUrl(String url) {
+    urls.add(url);
+  }
 }

@@ -10,20 +10,20 @@ package dto;
  * @author abedh
  */
 public class UIDDTO {
-    private String uid;
 
-    public UIDDTO() {
-    }
+  private String uid;
 
-    public UIDDTO(String uid) {
-        this.uid = uid;
-    }
+  public UIDDTO() {}
 
-    public String getUid() {
-        return uid;
-    }
+  public UIDDTO(String uid) {
+    this.uid = uid;
+  }
 
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+  public String getUid() {
+    return uid;
+  }
+
+  public void setUid(String uid) {
+    this.uid = uid;
+  }
 }
